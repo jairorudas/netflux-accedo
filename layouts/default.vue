@@ -1,18 +1,41 @@
 <template>
   <div>
-    <nuxt/>
-    <v-footer class="pa-3" app height="50">
-      <v-spacer></v-spacer>
-      <div>&copy; Netflux-Accedo {{ new Date().getFullYear() }}</div>
-    </v-footer>
+     <v-app id="netFlux" dark>
+      <v-toolbar color="fff" dense fixed clipped-left app >
+            <v-icon class="mx-2 logo">ondemand_video</v-icon>
+            <v-toolbar-title class="ml-0 align-center">
+              <span class="title" >NetFlux</span>
+            </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-layout row align-center style="max-width: 650px">
+            <v-text-field
+              :append-icon-cb="() => {}"
+              placeholder="Search..."
+              single-line
+              append-icon="search"
+              color="white"
+              hide-details></v-text-field>
+        </v-layout>
+
+        <nuxt-link to="/login">
+          <v-icon class="mx-2">account_circle</v-icon>Login
+        </nuxt-link>
+      </v-toolbar>
+      <nuxt/>
+    </v-app>
   </div>
 </template>
 <script>
- 
+  export default {
+    data() {
+      return {
+       
+      }
+    },
+    
+  }
 </script>
 <style lang="scss">
-@import '~/assets/scss/variables.scss';
-
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
@@ -22,12 +45,17 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  & .title, .logo{
+    color: red!important;
+    margin: 0
+  }
   
-  footer{
-    background-color: $custom-second-color  ;
-    color: $primary-txt-color;
+  a{
+    color: #fff;
+    text-decoration: none;
   }
 }
+
 
 *, *:before, *:after {
   box-sizing: border-box;
