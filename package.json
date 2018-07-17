@@ -14,9 +14,11 @@
     },
     "dependencies": {
         "nuxt": "^1.0.0",
-        "vue-resource": "^1.5.1"
+        "vue-resource": "^1.5.1",
+        "vuetify": "^1.1.4"
     },
     "devDependencies": {
+        "@nuxtjs/vuetify": "^0.4.2",
         "babel-eslint": "^8.2.1",
         "eslint": "^4.15.0",
         "eslint-friendly-formatter": "^3.0.0",
@@ -24,5 +26,8 @@
         "eslint-plugin-vue": "^4.0.0",
         "node-sass": "^4.9.2",
         "sass-loader": "^7.0.3"
+    },
+    "engines": {
+        "node": ">=8.9.0"
     }
 }
