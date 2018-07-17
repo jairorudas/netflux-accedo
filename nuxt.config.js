@@ -20,7 +20,7 @@ module.exports = {
     loading: { color: '#3B8070' },
     mode: 'spa',
     modules: [
-        '@nuxtjs/vuetify'
+        '@nuxtjs/vuetify',
     ],
     vuetify: {
         theme: {
@@ -31,7 +31,7 @@ module.exports = {
             info: '#2196F3',
             success: '#4CAF50',
             warning: '#FFC107'
-        }
+        },
     },
     /*
      ** Build configuration
