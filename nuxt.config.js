@@ -20,7 +20,7 @@ module.exports = {
     loading: { color: '#3B8070' },
     mode: 'spa',
     modules: [
-        '@nuxtjs/vuetify',
+        '@nuxtjs/vuetify'
     ],
     vuetify: {
         theme: {
@@ -33,6 +33,16 @@ module.exports = {
             warning: '#FFC107'
         },
     },
+
+    plugins: [
+        { src: '~/plugins/swiper.js', ssr: false },
+        { src: '~/plugins/vue-resource.js' },
+        { src: '~/plugins/lazy-load.js' },
+        { src: '~/plugins/localStorage.js' },
+    ],
+    css: [
+        'swiper/dist/css/swiper.css'
+    ],
     /*
      ** Build configuration
      */
