@@ -1,10 +1,18 @@
 <template>
     <div>
-        <section v-swiper:first="swiperOption">
-        <div class="swiper-wrapper"  >
-            <div class="swiper-slide" v-for="(movie, index) in renderMovies" :key="index" :data-hash="index" >
-            	<img :src="movie.images[0].url" class="banner " >
-              
+        <section v-swiper:carousel="swiperOption">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" 
+                  v-for="(movie, index) in renderMovies" :key="index" 
+                  :data-hash="index"
+                  @click="watchMovie($event.target.dataset.hash)" 
+                  v-lazy-container="{ selector: 'img', }">
+
+                <img :data-src="movie.images[0].url" 
+                      class="banner" 
+                      alt="movie poster" 
+                      data-loading="/ld.gif" >
+                <h1 class="title" >{{ movie.title }}</h1>
             </div>
         </div>
         <span class="swiper-button-next" tabindex="1"></span>
@@ -22,7 +30,7 @@ export default {
         slidesPerView: 'auto',
         centeredSlides: true,
         slidesPerView: 4,
-        spaceBetween: 30,
+        spaceBetween: 30, 
         initialSlide: 3,
         grabCursor: true,        
         observer: true,
@@ -60,7 +68,7 @@ export default {
             spaceBetween: 20
           },
           1200: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 20
           }
         },
@@ -76,7 +84,11 @@ export default {
           }
         }
 			},
-			movies: []
+      movies: [],
+      targetMovie: [],
+      history: [],
+      indexTouch: 0,
+      imgLoaded: true
     };
 	},
 	computed:{
@@ -85,29 +97,82 @@ export default {
 		}
   },
 
-	created: function () {
-		 this.$http.get('http://localhost:3002/api/movies').then((res) => {
-       let response = res.body.message.entries;
-       let responseWithOutImages = []
+  methods: {
+    watchMovie(pos){
+      this.storeIndex(pos)
+      this.findMovieSelected()
+      this.addHistory()
 
-       let parserResponse = response.map((el, ind) => {
-          if(el.images[0].url === "") {
-           responseWithOutImages.push(ind)
-          } 
-          el.images[0].url = el.images[0].url.replace('200', '500') 
-          return el
-       })
+      // Recovery in  /watch
+      this.$ls.set('movieSelected', JSON.stringify(this.targetMovie)) 
 
-      responseWithOutImages.forEach((el) => {
-        parserResponse.splice(el, 1)
+      //save history on localStorage and recovery on /history
+      this.$ls.set('history', JSON.stringify(this.history))
+
+     // go to video page
+     this.$router.push('/watch')
+    },
+
+    findMovieSelected () {      
+      this.targetMovie = this.movies.slice(this.indexTouch,  this.indexTouch + 1)[0]
+    },
+
+    addHistory(){
+
+      let finded = this.history.some((el, ind) => {
+        return el.id === this.targetMovie.id
       })
+
+      if(!finded) this.history.push(this.targetMovie)
       
-      this.movies = parserResponse;
-       //console.log(this.movies)
+    },
+
+    imgReady(){
+      this.imgLoaded = false
+    },
+
+    storeIndex(pos){
+      this.indexTouch = pos;    
+    }
+  },
+
+	beforeCreate () {
+    let moviesRecoveried = JSON.parse(this.$ls.get('movies'))
+
+    if( moviesRecoveried !== undefined){
+
+      this.$http.get('http://localhost:3002/api/movies').then((res) => {
+        let response = res.body.message.entries;
+        let responseWithOutImages = []
+ 
+        let parserResponse = response.map((el, ind) => {
+           if(el.images[0].url === "") {
+            responseWithOutImages.push(ind)
+           } 
+           el.images[0].url = el.images[0].url.replace('200', '500') 
+           return el
+        })
+ 
+       responseWithOutImages.forEach((el) => {
+         parserResponse.splice(el, 1)
+       })
        
-     }).catch(err => console.log(err))
+       this.$ls.set('movies', JSON.stringify(parserResponse))
+ 
+       this.movies = parserResponse;
+        
+      }).catch(err => console.log(err))
+
+    } else {
+      this.movies = moviesRecoveried
+    }
     
-	}
+  },
+  mounted: function () {
+    document.addEventListener('keyup', (event) => {
+      if(event.keyCode === 13 ) this.watchMovie(this.carousel.realIndex)
+    })
+  }
 	
 };
 </script>
@@ -116,10 +181,22 @@ export default {
 	@import '../assets/scss/variables.scss';
 	.swiper-slide {
     height: 80vh;
+    list-style: none;
+    position: relative;
       & > .banner{
         border-radius: $b-radius;
         max-width: 100%;
         min-height: 80vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+      }
+      & > .title{
+        color: #fff!important;
+        margin: 10px 0 0 10px;
+        text-align: left;
+        text-transform: uppercase;
       }
       &.swiper-slide-active {
       border: 3px solid $custom-primary-color;
