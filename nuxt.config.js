@@ -37,11 +37,11 @@ module.exports = {
     plugins: [
         { src: '~/plugins/swiper.js', ssr: false },
         { src: '~/plugins/vue-resource.js' },
-        { src: '~/plugins/lazy-load.js' },
         { src: '~/plugins/localStorage.js' },
+        { src: '~/plugins/lazy-load.js' },
     ],
     css: [
-        'swiper/dist/css/swiper.css'
+        'swiper/dist/css/swiper.css',
     ],
     /*
      ** Build configuration
