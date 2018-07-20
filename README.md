@@ -1,6 +1,8 @@
 # netflux-accedo
 
-> Test for a job on Accedo
+> Test for a job Accedo
+
+> This project use VueJS 2, Nuxt, Vue-resource, v-lazy-load and swiper.
 
 ## Build Setup
 
