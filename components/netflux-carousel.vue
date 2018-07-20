@@ -199,6 +199,7 @@ export default {
       & .banner{
         max-width: 100%;
         margin: 0 auto;
+        min-height: 297px;
       }
       
       &.swiper-slide-active {
