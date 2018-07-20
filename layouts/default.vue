@@ -1,23 +1,18 @@
 <template>
-  <div>
+  <div >
      <v-app id="netFlux" dark>
-      <v-toolbar color="fff" dense fixed clipped-left app >
+      <v-toolbar color="fff" dense fixed clipped-left app tabindex="1">
             <v-icon class="mx-2 logo">ondemand_video</v-icon>
             <v-toolbar-title class="ml-0 align-center">
-              <span class="title" >NetFlux</span>
+              <nuxt-link to="/">
+                <span class="title">NetFlux</span>
+              </nuxt-link>
             </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-layout row align-center style="max-width: 650px">
-            <v-text-field
-              :append-icon-cb="() => {}"
-              placeholder="Search..."
-              single-line
-              append-icon="search"
-              color="white"
-              hide-details></v-text-field>
-        </v-layout>
-
-        <nuxt-link to="/login">
+          
+        <nuxt-link to="/history">
+        <v-icon class="mx-2">history</v-icon>history</nuxt-link>
+        <nuxt-link to="/login"  tabindex="3">
           <v-icon class="mx-2">account_circle</v-icon>Login
         </nuxt-link>
       </v-toolbar>
@@ -37,7 +32,6 @@
 </script>
 <style lang="scss">
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
