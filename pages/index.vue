@@ -5,7 +5,6 @@
       <v-layout justify-center >
         <v-flex shrink>
           <netflux-carousel />
-          
         </v-flex>
       </v-layout>
     </v-container>
