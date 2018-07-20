@@ -208,6 +208,7 @@ export default {
     }
    .desciption{
      height: 100px;
+     overflow: hidden;
    } 
 	}
 </style>
