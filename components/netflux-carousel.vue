@@ -106,11 +106,6 @@ export default {
       // Recovery in  /watch
       this.$ls.set('movieSelected', JSON.stringify(this.targetMovie)) 
 
-      //save history on localStorage and recovery on /history
-      this.$ls.set('history', JSON.stringify(this.history))
-
-     // go to video page
-     this.$router.push('/watch')
     },
 
     findMovieSelected () {      
@@ -123,12 +118,13 @@ export default {
         return el.id === this.targetMovie.id
       })
 
-      if(!finded) this.history.push(this.targetMovie)
+      if(!finded) {
+        this.history.unshift(this.targetMovie);
+        this.$ls.set('history', JSON.stringify(this.history))
+      }
       
-    },
-
-    imgReady(){
-      this.imgLoaded = false
+     this.$router.push('/watch')
+      
     },
 
     storeIndex(pos){
@@ -136,10 +132,15 @@ export default {
     }
   },
 
+  created(){
+    let lsHistory = JSON.parse(this.$ls.get('history')) 
+    Boolean(lsHistory) ?  this.history = lsHistory : false;
+  },
+
 	beforeCreate () {
     let moviesRecoveried = JSON.parse(this.$ls.get('movies'))
 
-    if( moviesRecoveried !== undefined){
+    if( moviesRecoveried !== undefined) {
 
       this.$http.get('http://localhost:3002/api/movies').then((res) => {
         let response = res.body.message.entries;
