@@ -5,15 +5,27 @@
             <div class="swiper-slide" 
                   v-for="(movie, index) in renderMovies" :key="index" 
                   :data-hash="index"
-                  @click="watchMovie($event.target.dataset.hash)" 
+                  @click="watchMovie()" 
                   v-lazy-container="{ selector: 'img', }">
 
-                <img :data-src="movie.images[0].url" 
+                  <v-card :style="{overflow: 'hidden'}">
+                    <img :data-src="movie.images[0].url" 
                       class="banner" 
                       alt="movie poster" 
                       data-loading="/ld.gif"
                       data-error="/error-500.jpg">
-                <h1 class="title" >{{ movie.title }}</h1>
+
+                    <v-card-title primary-title>
+                      <div>
+                        <h3 class="headline mb-0">{{ movie.title }}</h3>
+                        <div class="desciption"> {{ movie.description }}</div>
+                      </div>
+                    </v-card-title>
+
+                    <v-card-actions>
+                      <v-btn flat color="orange" to="/watch-video" >watch</v-btn>
+                    </v-card-actions>
+                  </v-card>
             </div>
         </div>
         <span class="swiper-button-next" tabindex="1"></span>
@@ -99,22 +111,21 @@ export default {
   },
 
   methods: {
-    watchMovie(pos){
+    watchMovie(){
+      let pos = this.carousel.realIndex;
       this.storeIndex(pos)
       this.findMovieSelected()
       this.addHistory()
 
-      // Recovery in  /watch
       this.$ls.set('movieSelected', JSON.stringify(this.targetMovie)) 
 
     },
 
-    findMovieSelected () {      
+    findMovieSelected () {    
       this.targetMovie = this.movies.slice(this.indexTouch,  this.indexTouch + 1)[0]
     },
 
     addHistory(){
-
       let finded = this.history.some((el, ind) => {
         return el.id === this.targetMovie.id
       })
@@ -182,28 +193,21 @@ export default {
 <style scoped lang="scss">
 	@import '../assets/scss/variables.scss';
 	.swiper-slide {
-    height: 80vh;
+    //height: 80vh;
     list-style: none;
     position: relative;
-      & > .banner{
-        border-radius: $b-radius;
+      & .banner{
         max-width: 100%;
-        min-height: 80vh;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
+        margin: 0 auto;
       }
-      & > .title{
-        color: #fff!important;
-        margin: 10px 0 0 10px;
-        text-align: left;
-        text-transform: uppercase;
-      }
+      
       &.swiper-slide-active {
       border: 3px solid $custom-primary-color;
       border-radius: $b-radius;
       overflow: hidden;
     }
+   .desciption{
+     height: 100px;
+   } 
 	}
 </style>
