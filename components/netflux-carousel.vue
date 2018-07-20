@@ -11,7 +11,8 @@
                 <img :data-src="movie.images[0].url" 
                       class="banner" 
                       alt="movie poster" 
-                      data-loading="/ld.gif" >
+                      data-loading="/ld.gif"
+                      data-error="/error-500.jpg">
                 <h1 class="title" >{{ movie.title }}</h1>
             </div>
         </div>
