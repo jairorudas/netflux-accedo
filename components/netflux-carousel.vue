@@ -123,7 +123,7 @@ export default {
         this.$ls.set('history', JSON.stringify(this.history))
       }
       
-     this.$router.push('/watch')
+     this.$router.push('/watch-video')
       
     },
 
