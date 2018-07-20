@@ -4,7 +4,7 @@
 
 > This project use VueJS 2, Nuxt, Vue-resource, v-lazy-load and swiper.
 
-> [Demo](netflux-accedo.surge.sh)
+> [Demo](https://netflux-accedo.surge.sh)
 
 ## Build Setup
 
