@@ -3,13 +3,13 @@
         <v-container fill-height fluid>
             <v-layout justify-center >
                 <v-flex shrink v-bind:style="{ position: 'relative' }"> 
-                    <v-btn tabindex="4" color="#D90429" :nuxt="true" :absolute="true" to="/" :right="true">Back</v-btn>
+                    <v-btn tabindex="3" color="#D90429" :nuxt="true" :absolute="true" to="/" :right="true">Back</v-btn>
                     <h1>   {{ video.title }} </h1> 
                     <video :src="this.video.contents[0].url" 
                             controls 
                             autoplay="true" 
                             @ended="onPlayerEnded()"
-                            tabindex="3"></video>
+                            tabindex="4"></video>
                 </v-flex>
             </v-layout>
         </v-container>

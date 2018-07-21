@@ -21,15 +21,9 @@
                         <div class="desciption"> {{ movie.description }}</div>
                       </div>
                     </v-card-title>
-
-                    <v-card-actions tabindex="0">
-                      <v-btn flat color="orange" to="/watch-video" >watch</v-btn>
-                    </v-card-actions>
                   </v-card>
             </div>
         </div>
-        <span class="swiper-button-next" tabindex="3"></span>
-        <span class="swiper-button-prev" tabindex="4"></span>
         </section>
     </div>
 </template>
@@ -51,14 +45,6 @@ export default {
           invert: true
         },
         hasNavigation: true,
-        pagination: {
-          el: ".swiper-pagination",
-          dynamicBullets: true
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        },
         keyboard: {
           enabled: true,
           onlyInViewport: false
