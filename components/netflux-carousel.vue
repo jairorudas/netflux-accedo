@@ -153,8 +153,8 @@ export default {
     let moviesRecoveried = JSON.parse(this.$ls.get('movies'))
 
     if( moviesRecoveried !== undefined) {
-
-      this.$http.get('http://localhost:3002/api/movies').then((res) => {
+      const headers = {"Content-Type": "application/json"}
+      this.$http.get('https://8pg0wyviq4.execute-api.us-east-1.amazonaws.com/dev/movies', headers).then((res) => {
         let response = res.body.message.entries;
         let responseWithOutImages = []
  
