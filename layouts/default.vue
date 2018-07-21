@@ -12,9 +12,6 @@
           
         <nuxt-link to="/history">
         <v-icon class="mx-2">history</v-icon>history</nuxt-link>
-        <nuxt-link to="/login"  tabindex="3">
-          <v-icon class="mx-2">account_circle</v-icon>Login
-        </nuxt-link>
       </v-toolbar>
       <nuxt/>
     </v-app>
