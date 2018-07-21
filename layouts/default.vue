@@ -10,7 +10,7 @@
             </v-toolbar-title>
           <v-spacer></v-spacer>
           
-        <nuxt-link to="/history">
+        <nuxt-link to="/history" tabindex="2">
         <v-icon class="mx-2">history</v-icon>history</nuxt-link>
       </v-toolbar>
       <nuxt/>

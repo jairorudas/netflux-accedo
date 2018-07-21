@@ -22,14 +22,14 @@
                       </div>
                     </v-card-title>
 
-                    <v-card-actions>
+                    <v-card-actions tabindex="0">
                       <v-btn flat color="orange" to="/watch-video" >watch</v-btn>
                     </v-card-actions>
                   </v-card>
             </div>
         </div>
-        <span class="swiper-button-next" tabindex="1"></span>
-        <span class="swiper-button-prev" tabindex="2"></span>
+        <span class="swiper-button-next" tabindex="3"></span>
+        <span class="swiper-button-prev" tabindex="4"></span>
         </section>
     </div>
 </template>
