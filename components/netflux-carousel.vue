@@ -84,17 +84,6 @@ export default {
             slidesPerView: 4,
             spaceBetween: 20
           }
-        },
-        on: {
-          slideChange() {
-            console.log("onSlideChangeEnd", this.realIndex);
-          },
-          tap() {
-            console.log("onTap", this);
-          },
-          realIndex(e) {
-            console.log(this, "INDEX");
-          }
         }
 			},
       movies: [],
