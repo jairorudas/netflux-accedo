@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section v-swiper:carousel="swiperOption">
+        <section v-swiper:carousel="swiperOption" tabindex="3">
         <div class="swiper-wrapper">
             <div class="swiper-slide" 
                   v-for="(movie, index) in renderMovies" :key="index" 

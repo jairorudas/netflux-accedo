@@ -1,16 +1,16 @@
 <template>
   <div >
      <v-app id="netFlux" dark>
-      <v-toolbar color="fff" dense fixed clipped-left app tabindex="1">
+      <v-toolbar color="fff" dense fixed clipped-left app tabindex="1" >
             <v-icon class="mx-2 logo">ondemand_video</v-icon>
-            <v-toolbar-title class="ml-0 align-center">
+            <v-toolbar-title class="ml-0 align-center" >
               <nuxt-link to="/">
-                <span class="title">NetFlux</span>
+                <span class="title -link">NetFlux</span>
               </nuxt-link>
             </v-toolbar-title>
           <v-spacer></v-spacer>
           
-        <nuxt-link to="/history" tabindex="2">
+        <nuxt-link to="/history" tabindex="2" class="-link">
         <v-icon class="mx-2">history</v-icon>history</nuxt-link>
       </v-toolbar>
       <nuxt/>
@@ -38,11 +38,15 @@ html {
   box-sizing: border-box;
   & .title, .logo{
     color: red!important;
-    margin: 0
+    margin: 0;
+  }
+
+  & .-link:focus{
+    transform: scale(1.5)!important;
   }
   
   a{
-    color: #fff;
+    color: #fff;      
     text-decoration: none;
   }
 }
@@ -51,5 +55,16 @@ html {
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+*:focus{
+  outline-color: red;
+  transform: scale(1.05);
+  transition: .5s ease all;
+}
+
+*:not(:focus){
+  transform: scale(1);
+  transition: .5s ease all;
 }
 </style>
