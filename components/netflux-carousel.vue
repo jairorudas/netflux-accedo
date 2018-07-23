@@ -52,7 +52,7 @@ export default {
         breakpoints: {
           // when window width is <= 320px
           320: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 10
           },
 
