@@ -2,16 +2,16 @@
     <div>
         <section v-swiper:carousel="swiperOption" tabindex="3">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" 
-                  v-for="(movie, index) in renderMovies" :key="index" 
+            <div class="swiper-slide"
+                  v-for="(movie, index) in renderMovies" :key="index"
                   :data-hash="index"
-                  @click="watchMovie()" 
+                  @click="watchMovie()"
                   v-lazy-container="{ selector: 'img', }">
 
                   <v-card :style="{overflow: 'hidden'}">
-                    <img :data-src="movie.images[0].url" 
-                      class="banner" 
-                      alt="movie poster" 
+                    <img :data-src="movie.images[0].url"
+                      class="banner"
+                      alt="movie poster"
                       data-loading="/ld.gif"
                       data-error="/error-500.jpg">
 
@@ -37,9 +37,9 @@ export default {
         slidesPerView: 'auto',
         centeredSlides: true,
         slidesPerView: 4,
-        spaceBetween: 30, 
+        spaceBetween: 30,
         initialSlide: 3,
-        grabCursor: true,        
+        grabCursor: true,
         observer: true,
         mousewheel: {
           invert: true
@@ -92,11 +92,11 @@ export default {
       this.findMovieSelected()
       this.addHistory()
 
-      this.$ls.set('movieSelected', JSON.stringify(this.targetMovie)) 
+      this.$ls.set('movieSelected', JSON.stringify(this.targetMovie))
 
     },
 
-    findMovieSelected () {    
+    findMovieSelected () {
       this.targetMovie = this.movies.slice(this.indexTouch,  this.indexTouch + 1)[0]
     },
 
@@ -109,18 +109,18 @@ export default {
         this.history.unshift(this.targetMovie);
         this.$ls.set('history', JSON.stringify(this.history))
       }
-      
+
      this.$router.push('/watch-video')
-      
+
     },
 
     storeIndex(pos){
-      this.indexTouch = pos;    
+      this.indexTouch = pos;
     }
   },
 
   created(){
-    let lsHistory = JSON.parse(this.$ls.get('history')) 
+    let lsHistory = JSON.parse(this.$ls.get('history'))
     Boolean(lsHistory) ?  this.history = lsHistory : false;
   },
 
@@ -129,39 +129,40 @@ export default {
 
     if( moviesRecoveried !== undefined) {
       const headers = {"Content-Type": "application/json"}
-      this.$http.get('https://8pg0wyviq4.execute-api.us-east-1.amazonaws.com/dev/movies', headers).then((res) => {
+     //https://8pg0wyviq4.execute-api.us-east-1.amazonaws.com/dev/movies
+      this.$http.get('https://n3pzqmvvdc.execute-api.us-east-1.amazonaws.com/dev/movies', headers).then((res) => {
         let response = res.body.message.entries;
         let responseWithOutImages = []
- 
+
         let parserResponse = response.map((el, ind) => {
            if(el.images[0].url === "") {
             responseWithOutImages.push(ind)
-           } 
-           el.images[0].url = el.images[0].url.replace('200', '500') 
+           }
+           el.images[0].url = el.images[0].url.replace('200', '500')
            return el
         })
- 
+
        responseWithOutImages.forEach((el) => {
          parserResponse.splice(el, 1)
        })
-       
+
        this.$ls.set('movies', JSON.stringify(parserResponse))
- 
+
        this.movies = parserResponse;
-        
+
       }).catch(err => console.log(err))
 
     } else {
       this.movies = moviesRecoveried
     }
-    
+
   },
   mounted: function () {
     document.addEventListener('keyup', (event) => {
       if(event.keyCode === 13 ) this.watchMovie(this.carousel.realIndex)
     })
   }
-	
+
 };
 </script>
 
@@ -176,7 +177,7 @@ export default {
         margin: 0 auto;
         min-height: 297px;
       }
-      
+
       &.swiper-slide-active {
       border: 3px solid $custom-primary-color;
       border-radius: $b-radius;
@@ -185,6 +186,6 @@ export default {
    .desciption{
      height: 100px;
      overflow: hidden;
-   } 
+   }
 	}
 </style>
